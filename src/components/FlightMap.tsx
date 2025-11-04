@@ -1,109 +1,86 @@
-import { useEffect, useRef, useState } from 'react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import { Plane } from 'lucide-react';
+import { Plane, MapPin } from 'lucide-react';
 
 const FlightMap = () => {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const [mapboxToken, setMapboxToken] = useState('');
+  return (
+    <div className="relative w-full h-[500px] rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-sky/20 via-background to-ocean/20">
+      {/* Animated Background */}
+      <div className="absolute inset-0 opacity-10">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-primary"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
 
-  useEffect(() => {
-    if (!mapContainer.current || !mapboxToken) return;
+      {/* Flight Route Container */}
+      <div className="relative w-full h-full flex items-center justify-center p-12">
+        {/* Origin - São Paulo */}
+        <div className="absolute left-16 top-1/2 -translate-y-1/2 animate-fade-in">
+          <div className="relative">
+            <div className="w-4 h-4 bg-primary rounded-full animate-pulse shadow-lg" />
+            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-32 text-center">
+              <MapPin className="w-5 h-5 mx-auto mb-1 text-primary" />
+              <p className="font-bold text-foreground text-sm">GRU</p>
+              <p className="text-xs text-muted-foreground">São Paulo</p>
+              <p className="text-xs font-semibold text-primary mt-1">01:00 AM</p>
+            </div>
+          </div>
+        </div>
 
-    mapboxgl.accessToken = mapboxToken;
-    
-    // São Paulo coordinates
-    const origin = [-46.6333, -23.5505];
-    // Cancún coordinates
-    const destination = [-86.8515, 21.1619];
+        {/* Destination - Cancún */}
+        <div className="absolute right-16 top-1/2 -translate-y-1/2 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          <div className="relative">
+            <div className="w-4 h-4 bg-accent rounded-full animate-pulse shadow-lg" style={{ animationDelay: "0.5s" }} />
+            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-32 text-center">
+              <MapPin className="w-5 h-5 mx-auto mb-1 text-accent" />
+              <p className="font-bold text-foreground text-sm">CUN</p>
+              <p className="text-xs text-muted-foreground">Cancún</p>
+              <p className="text-xs font-semibold text-accent mt-1">10:12 AM</p>
+            </div>
+          </div>
+        </div>
 
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/light-v11',
-      center: [-66.7425, 2.1562], // Midpoint
-      zoom: 3,
-    });
-
-    map.current.on('load', () => {
-      // Add route line
-      map.current?.addSource('route', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'LineString',
-            coordinates: [origin, destination]
-          }
-        }
-      });
-
-      map.current?.addLayer({
-        id: 'route',
-        type: 'line',
-        source: 'route',
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round'
-        },
-        paint: {
-          'line-color': 'hsl(199, 89%, 48%)',
-          'line-width': 3,
-          'line-dasharray': [2, 2]
-        }
-      });
-
-      // Add markers
-      new mapboxgl.Marker({ color: 'hsl(199, 89%, 48%)' })
-        .setLngLat(origin as [number, number])
-        .setPopup(new mapboxgl.Popup().setHTML('<strong>GRU - São Paulo</strong><br>Partida: 01:00 AM'))
-        .addTo(map.current!);
-
-      new mapboxgl.Marker({ color: 'hsl(24, 95%, 53%)' })
-        .setLngLat(destination as [number, number])
-        .setPopup(new mapboxgl.Popup().setHTML('<strong>CUN - Cancún</strong><br>Chegada: 10:12 AM'))
-        .addTo(map.current!);
-    });
-
-    return () => {
-      map.current?.remove();
-    };
-  }, [mapboxToken]);
-
-  if (!mapboxToken) {
-    return (
-      <div className="relative w-full h-[500px] bg-card rounded-xl shadow-lg flex items-center justify-center">
-        <div className="text-center p-6 max-w-md">
-          <Plane className="w-12 h-12 mx-auto mb-4 text-primary" />
-          <h3 className="text-lg font-semibold mb-2">Configure o Mapa</h3>
-          <p className="text-sm text-muted-foreground mb-4">
-            Para visualizar a rota do voo, insira sua chave pública do Mapbox abaixo.
-          </p>
-          <p className="text-xs text-muted-foreground mb-4">
-            Obtenha sua chave em: <a href="https://mapbox.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">mapbox.com</a>
-          </p>
-          <input
-            type="text"
-            placeholder="Cole sua chave do Mapbox aqui"
-            className="w-full px-4 py-2 rounded-lg border border-input bg-background text-sm"
-            onChange={(e) => setMapboxToken(e.target.value)}
+        {/* Flight Path */}
+        <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
+          <defs>
+            <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0.8" />
+            </linearGradient>
+          </defs>
+          
+          {/* Curved flight path */}
+          <path
+            d="M 120 250 Q 400 150, 680 250"
+            fill="none"
+            stroke="url(#pathGradient)"
+            strokeWidth="3"
+            strokeDasharray="10,5"
+            className="animate-fade-in"
+            style={{ animationDelay: "0.4s" }}
           />
+        </svg>
+
+        {/* Animated Plane */}
+        <div className="absolute left-16 top-1/2 -translate-y-1/2">
+          <div className="animate-plane-flight">
+            <Plane className="w-8 h-8 text-primary transform rotate-45" />
+          </div>
         </div>
       </div>
-    );
-  }
 
-  return (
-    <div className="relative w-full h-[500px] rounded-xl overflow-hidden shadow-lg">
-      <div ref={mapContainer} className="absolute inset-0" />
-      <div className="absolute top-4 left-4 bg-card/95 backdrop-blur-sm px-4 py-3 rounded-lg shadow-md">
+      {/* Info Card */}
+      <div className="absolute top-4 left-4 bg-card/95 backdrop-blur-sm px-4 py-3 rounded-lg shadow-md border border-border animate-fade-in">
         <div className="flex items-center gap-2 mb-2">
           <Plane className="w-5 h-5 text-primary" />
           <span className="font-semibold text-foreground">Rota de Voo</span>
         </div>
         <p className="text-sm text-muted-foreground">GRU → CUN</p>
-        <p className="text-xs text-muted-foreground mt-1">Duração estimada: ~9h</p>
+        <p className="text-xs text-muted-foreground mt-1">Duração: 9h 30min</p>
+        <p className="text-xs text-primary font-semibold mt-1">05 de Novembro</p>
       </div>
     </div>
   );

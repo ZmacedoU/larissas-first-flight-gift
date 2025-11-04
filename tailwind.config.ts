@@ -93,18 +93,16 @@ export default {
         },
         "plane-flight": {
           "0%": { 
-            transform: "translate(0, 0) rotate(-45deg)",
-            opacity: "0",
-          },
-          "10%": {
+            transform: "translate(0, 0) rotate(45deg) scale(1)",
             opacity: "1",
           },
-          "90%": {
+          "50%": {
+            transform: "translate(280px, -50px) rotate(45deg) scale(1.1)",
             opacity: "1",
           },
           "100%": { 
-            transform: "translate(100%, -50%) rotate(-45deg)",
-            opacity: "0",
+            transform: "translate(560px, 0) rotate(45deg) scale(1)",
+            opacity: "1",
           },
         },
         "fade-in-up": {
@@ -132,7 +130,7 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "float": "float 6s ease-in-out infinite",
-        "plane-flight": "plane-flight 9s linear infinite",
+        "plane-flight": "plane-flight 15s ease-in-out infinite",
         "fade-in-up": "fade-in-up 0.6s ease-out",
         "polaroid-appear": "polaroid-appear 0.6s ease-out forwards",
       },

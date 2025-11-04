@@ -58,15 +58,15 @@ const BoardingPass = ({ onClick }: BoardingPassProps) => {
         <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border">
           <div>
             <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-1">Data</p>
-            <p className="text-sm font-semibold text-foreground">Em Breve</p>
+            <p className="text-sm font-semibold text-foreground">05 de Nov</p>
           </div>
           <div>
-            <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-1">Portão</p>
-            <p className="text-sm font-semibold text-foreground">--</p>
+            <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-1">Duração</p>
+            <p className="text-sm font-semibold text-foreground">9h 30min</p>
           </div>
           <div>
             <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-1">Assento</p>
-            <p className="text-sm font-semibold text-foreground">--</p>
+            <p className="text-sm font-semibold text-primary">Meu coração ❤️</p>
           </div>
         </div>
 
