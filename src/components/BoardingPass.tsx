@@ -40,7 +40,7 @@ const BoardingPass = ({ onClick }: BoardingPassProps) => {
               <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-1">Origem</p>
               <p className="text-3xl font-bold text-foreground">GRU</p>
               <p className="text-sm text-muted-foreground">São Paulo, Brasil</p>
-              <p className="text-lg font-semibold text-foreground mt-2">01:00 AM</p>
+              <p className="text-lg font-semibold text-foreground mt-2">01:40 AM</p>
             </div>
           </div>
 

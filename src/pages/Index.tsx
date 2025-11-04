@@ -1,9 +1,18 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import BoardingPass from "@/components/BoardingPass";
 import { Plane } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
+  const [isTearing, setIsTearing] = useState(false);
+
+  const handleTicketClick = () => {
+    setIsTearing(true);
+    setTimeout(() => {
+      navigate("/journey");
+    }, 800);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-light via-background to-cloud flex items-center justify-center p-4 relative overflow-hidden">
@@ -25,7 +34,19 @@ const Index = () => {
           </p>
         </div>
 
-        <BoardingPass onClick={() => navigate("/journey")} />
+        <div className={`relative ${isTearing ? 'ticket-tear-animation' : ''}`}>
+          <BoardingPass onClick={handleTicketClick} />
+          
+          {/* Tear effect overlay */}
+          {isTearing && (
+            <>
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="tear-top" />
+                <div className="tear-bottom" />
+              </div>
+            </>
+          )}
+        </div>
 
         <p className="text-center text-sm text-muted-foreground mt-6 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
           Um presente especial para uma viagem ainda mais especial ✨

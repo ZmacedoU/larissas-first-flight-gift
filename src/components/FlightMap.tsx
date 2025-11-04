@@ -25,7 +25,7 @@ const FlightMap = () => {
               <MapPin className="w-5 h-5 mx-auto mb-1 text-primary" />
               <p className="font-bold text-foreground text-sm">GRU</p>
               <p className="text-xs text-muted-foreground">São Paulo</p>
-              <p className="text-xs font-semibold text-primary mt-1">01:00 AM</p>
+              <p className="text-xs font-semibold text-primary mt-1">01:40 AM</p>
             </div>
           </div>
         </div>
@@ -54,11 +54,23 @@ const FlightMap = () => {
           
           {/* Curved flight path */}
           <path
-            d="M 120 250 Q 400 150, 680 250"
+            d="M 100 250 Q 400 100, 700 250"
             fill="none"
             stroke="url(#pathGradient)"
-            strokeWidth="3"
-            strokeDasharray="10,5"
+            strokeWidth="4"
+            strokeDasharray="12,8"
+            className="animate-fade-in"
+            style={{ animationDelay: "0.4s" }}
+          />
+          
+          {/* Shadow path for depth */}
+          <path
+            d="M 100 252 Q 400 102, 700 252"
+            fill="none"
+            stroke="hsl(var(--primary))"
+            strokeWidth="2"
+            strokeOpacity="0.2"
+            strokeDasharray="12,8"
             className="animate-fade-in"
             style={{ animationDelay: "0.4s" }}
           />
