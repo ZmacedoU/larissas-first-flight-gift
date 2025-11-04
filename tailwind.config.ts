@@ -47,6 +47,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        sky: {
+          DEFAULT: "hsl(var(--sky))",
+          light: "hsl(var(--sky-light))",
+        },
+        sunset: "hsl(var(--sunset))",
+        cloud: "hsl(var(--cloud))",
+        ocean: "hsl(var(--ocean))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -80,10 +87,54 @@ export default {
             height: "0",
           },
         },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        "plane-flight": {
+          "0%": { 
+            transform: "translate(0, 0) rotate(-45deg)",
+            opacity: "0",
+          },
+          "10%": {
+            opacity: "1",
+          },
+          "90%": {
+            opacity: "1",
+          },
+          "100%": { 
+            transform: "translate(100%, -50%) rotate(-45deg)",
+            opacity: "0",
+          },
+        },
+        "fade-in-up": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(20px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+        "polaroid-appear": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(30px) rotate(0deg)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0) rotate(var(--rotation, 0deg))",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "plane-flight": "plane-flight 9s linear infinite",
+        "fade-in-up": "fade-in-up 0.6s ease-out",
+        "polaroid-appear": "polaroid-appear 0.6s ease-out forwards",
       },
     },
   },
