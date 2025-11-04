@@ -30,7 +30,7 @@ const BoardingPass = ({ onClick }: BoardingPassProps) => {
         {/* Passenger Info */}
         <div className="space-y-2">
           <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">Passageira</p>
-          <p className="text-2xl font-bold text-foreground">Larissa</p>
+          <p className="text-2xl font-bold text-foreground">Larissa Arruda</p>
         </div>
 
         {/* Flight Details */}
@@ -83,12 +83,12 @@ const BoardingPass = ({ onClick }: BoardingPassProps) => {
               ))}
             </div>
           </div>
-          <p className="text-center text-xs text-muted-foreground mt-2 font-mono">LARISSA-2024-CUN</p>
+          <p className="text-center text-xs text-muted-foreground mt-2 font-mono">LARISSA-2025-CUN</p>
         </div>
 
         {/* Footer Message */}
         <div className="text-center pt-4">
-          <p className="text-primary font-semibold">✨ Clique para iniciar a jornada ✨</p>
+          <p className="text-primary font-semibold">✨ Aperte para iniciar a jornada ✨</p>
         </div>
       </div>
 
