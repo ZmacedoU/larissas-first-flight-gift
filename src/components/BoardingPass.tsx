@@ -18,7 +18,7 @@ const BoardingPass = ({ onClick }: BoardingPassProps) => {
           <div className="flex items-center gap-3">
             <Plane className="w-8 h-8" />
             <div>
-              <h2 className="text-2xl font-bold">Primeira Viagem Internacional</h2>
+              <h2 className="text-2xl font-bold">CopaAirlines</h2>
               <p className="text-sm opacity-90">Boarding Pass</p>
             </div>
           </div>
